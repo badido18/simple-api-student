@@ -1,4 +1,4 @@
-name: Push in Docker hub
+name: Push backend in Docker hub
 on:
   workflow_run:
     workflows: [Tests]
@@ -9,7 +9,6 @@ on:
 
 jobs:
   build-and-push-docker-image:
-    needs: test-backend
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
     if: github.ref == 'refs/heads/main'

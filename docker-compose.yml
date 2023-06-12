@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  backend:
+    build: ./simple-api-student
+    networks:
+      - simple-net
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    build: ./database
+    networks:
+      - simple-net
+    environment:
+      - POSTGRES_DB = db
+      - POSTGRES_USER = usr
+      - POSTGRES_PASSWORD = passwd
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U usr -d db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  httpd:
+    build: ./http-server
+    ports:
+      - 80:80
+    networks:
+      - simple-net
+    depends_on:
+      - backend
+
+volumes:
+  postgres-volume:
+
+networks:
+  simple-net:

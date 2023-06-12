@@ -1,0 +1,20 @@
+FROM openjdk:11
+
+# Set the working directory for our app
+WORKDIR /app
+
+# Copy the compiled Java into our directory
+COPY Main.java .
+
+# Compile the Java file
+RUN javac Main.java
+
+FROM openjdk:11-jre
+
+WORKDIR /app
+
+# Copy the compiled Java file (.class)
+COPY --from=0 /app/Main.class .
+
+# Run the Java code with the JRE
+CMD ["java", "Main"]

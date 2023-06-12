@@ -53,6 +53,7 @@ jobs:
           context: ./simple-api-student
           # Note: tags has to be all lower-case
           tags:  ${{secrets.DOCKERHUB_USERNAME}}/tp-devops/simple-api-student
+          push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push database
         uses: docker/build-push-action@v3
@@ -61,7 +62,7 @@ jobs:
           context: ./database
           # Note: tags has to be all lower-case
           tags:  ${{secrets.DOCKERHUB_USERNAME}}/tp-devops/database
-          # DO the same for database
+          push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build image and push httpd
         uses: docker/build-push-action@v3
@@ -70,6 +71,7 @@ jobs:
           context: ./http-server
           # Note: tags has to be all lower-case
           tags:  ${{secrets.DOCKERHUB_USERNAME}}/tp-devops/httpd
+          push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Clean up Docker images
         run: docker image prune -f

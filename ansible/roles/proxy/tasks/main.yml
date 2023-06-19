@@ -1,13 +1,13 @@
 - name: Pull Docker image from Docker Hub
   docker_image:
-    name: badido18/docker-course-httpd:1.0
+    name: badido18/httpd:latest
     source: pull
     state: present
 
 - name: Create Docker container
   docker_container:
     name: httpd
-    image: badido18/docker-course-httpd:1.0
+    image: badido18/httpd:latest
     state: started
     ports:
       - "80:80"

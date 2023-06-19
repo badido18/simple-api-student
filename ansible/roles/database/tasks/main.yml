@@ -1,13 +1,13 @@
 - name: Pull Docker image from Docker Hub
   docker_image:
-    name: badido18/docker-course-database:1.0
+    name: badido18/database:latest
     source: pull
     state: present
 
 - name: Create Docker container
   docker_container:
     name: database
-    image: badido18/docker-course-database:1.0
+    image: badido18/database:latest
     state: started
     recreate: yes
     networks:

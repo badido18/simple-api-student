@@ -1,13 +1,13 @@
 - name: Pull Docker image from Docker Hub
   docker_image:
-    name: badido18/simple-api-student:latest
+    name: badido18/front:latest
     source: pull
     state: present
 
 - name: Create Docker container
   docker_container:
-    name: backend
-    image: badido18/simple-api-student:latest
+    name: front
+    image: badido18/front:latest
     state: started
     networks:
       - name: simple-net

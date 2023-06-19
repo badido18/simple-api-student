@@ -1,11 +1,13 @@
 - hosts: all
   gather_facts: false
-  become: yes
+  become: yes #this one is to allow ansible to execute commands as root when necessary 
 
+  # this tasks is the last one to be executed  its a simple ping
   tasks:
     - name: Test connection
       ping:
 
+  # Here are the roles to define the tasts for each part of the app and their order
   roles:
     - docker
     - database

@@ -1,6 +1,6 @@
 name: Push backend in Docker hub
 on:
-  workflow_run:
+  workflow_run: # This so it launches only if the Test workflow is completed
     workflows: [Tests]
     types: 
       - completed

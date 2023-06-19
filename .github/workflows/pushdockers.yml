@@ -1,6 +1,6 @@
 name: Push non testing docker containers
 on:
-  push:
+  push: # Executes only on push to main or on a pull request
     branches: 
       - main
   pull_request:

@@ -7,18 +7,21 @@ services:
       - simple-net
     depends_on:
       database:
+        # run conditionned by database being fully loaded 
         condition: service_healthy
 
   database:
     build: ./database
     networks:
       - simple-net
+    #  specifying env variables
     environment:
       - POSTGRES_DB = db
       - POSTGRES_USER = usr
       - POSTGRES_PASSWORD = pwd
     volumes:
       - postgres-volume:/var/lib/postgresql/data 
+    # check that the database is mounted and all data is loaded
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U usr -d db"]
       interval: 5s
@@ -27,6 +30,7 @@ services:
 
   httpd:
     build: ./http-server
+    # specify the exposed port
     ports:
       - 80:80
     networks:
@@ -41,8 +45,10 @@ services:
     depends_on:
       - backend
 
+# Create a volume
 volumes:
   postgres-volume:
 
+# specify the network
 networks:
   simple-net:

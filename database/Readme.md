@@ -19,7 +19,7 @@ docker volume create postgres-volume
 # create network
 docker network create simple-net
 
-# link with adminer
+# run a container 
 ```
 docker run --network=simple-net -p 5432:5432 -v postgres-volume:/var/lib/postgresql/data  --name database badido18/database
 

@@ -22,7 +22,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-     #finally build your app with the latest command
+     #finally build your app with the latest command and launch sonar for Code Quality Verification
       - name: Build and test with Maven
         run: mvn clean verify sonar:sonar -Dsonar.projectKey=sao_api -Dsonar.organization=sao -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./simple-api-student/pom.xml
       

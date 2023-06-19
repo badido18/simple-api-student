@@ -1,4 +1,4 @@
-# Install Docke
+# Install all the necessary dependencies starting with yum package manager
 - name: Install yum utils
   yum:
     name: yum-utils
@@ -29,10 +29,12 @@
     name: docker
     executable: pip3
 
+# Verify that docker is running 
 - name: Make sure Docker is running
   service: name=docker state=started
   tags: docker
 
+# Create Docker needs network and a volume
 - name: Create a network
   community.docker.docker_network:
     name: simple-net

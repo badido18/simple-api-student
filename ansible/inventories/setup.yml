@@ -1,0 +1,7 @@
+all:
+ vars:
+   ansible_user: centos
+   ansible_ssh_private_key_file: ~/dev/docker-course/ssh-keys/id_rsa
+ children:
+   prod:
+     hosts: madjid.boudis.takima.cloud

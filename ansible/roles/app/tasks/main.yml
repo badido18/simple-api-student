@@ -1,0 +1,14 @@
+- name: Pull Docker image from Docker Hub
+  docker_image:
+    name: badido18/docker-course-backend:1.0
+    source: pull
+    state: present
+
+- name: Create Docker container
+  docker_container:
+    name: backend
+    image: badido18/docker-course-backend:1.0
+    state: started
+    networks:
+      - name: simple-net
+    

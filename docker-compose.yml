@@ -16,7 +16,7 @@ services:
     environment:
       - POSTGRES_DB = db
       - POSTGRES_USER = usr
-      - POSTGRES_PASSWORD = passwd
+      - POSTGRES_PASSWORD = pwd
     volumes:
       - postgres-volume:/var/lib/postgresql/data 
     healthcheck:

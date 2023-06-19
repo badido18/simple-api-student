@@ -41,5 +41,14 @@ jobs:
           tags:  ${{secrets.DOCKERHUB_USERNAME}}/httpd
           push: ${{ github.ref == 'refs/heads/main' }}
 
+      - name: Build image and push Front
+        uses: docker/build-push-action@v3
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./devops-front
+          # Note: tags has to be all lower-case
+          tags:  ${{secrets.DOCKERHUB_USERNAME}}/front
+          push: ${{ github.ref == 'refs/heads/main' }}
+
       - name: Clean up Docker images
         run: docker image prune -f

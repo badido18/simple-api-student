@@ -1,0 +1,16 @@
+- name: Pull Docker image from Docker Hub
+  docker_image:
+    name: badido18/docker-course-httpd:1.0
+    source: pull
+    state: present
+
+- name: Create Docker container
+  docker_container:
+    name: httpd
+    image: badido18/docker-course-httpd:1.0
+    state: started
+    ports:
+      - "80:80"
+    networks:
+      - name: simple-net
+    

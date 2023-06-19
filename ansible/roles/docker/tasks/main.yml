@@ -1,0 +1,49 @@
+# Install Docke
+- name: Install yum utils
+  yum:
+    name: yum-utils
+    state: latest
+
+- name: Install lvm2
+  yum:
+    name: lvm2
+    state: latest
+
+- name: add repo docker
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docer-ce.repo
+  become: yes
+
+- name: Install Docker
+  yum:
+    name: docker-ce
+    state: present
+
+- name: install python3
+  yum:
+    name: python3
+
+- name: Pip install 
+  pip:
+    name: docker
+    executable: pip3
+
+- name: Make sure Docker is running
+  service: name=docker state=started
+  tags: docker
+
+- name: Create a network
+  community.docker.docker_network:
+    name: simple-net
+
+- name: Create a volume
+  community.docker.docker_volume:
+    name: postgres-volume
+
+# Not needed in case of public repositories
+- name: Log in to Docker Hub
+  docker_login:
+    username: "{{ lookup('env', 'DOCKERHUB_USERNAME') }}"
+    password: "{{ lookup('env', 'DOCKERHUB_PASSWORD') }}"
+
